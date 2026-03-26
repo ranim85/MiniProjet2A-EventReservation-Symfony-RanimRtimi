@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}Gestion des événements{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Événements</h1>
+        <a href="{{ path('admin_event_new') }}" class="btn btn-primary">+ Nouvel événement</a>
+    </div>
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr><th>Titre</th><th>Date</th><th>Lieu</th><th>Places</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.date|date('d/m/Y H:i') }}</td>
+                <td>{{ event.location }}</td>
+                <td>{{ event.seats }}</td>
+                <td>
+                    <a href="{{ path('admin_event_edit', {id: event.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                    <a href="{{ path('admin_event_reservations', {id: event.id}) }}" class="btn btn-sm btn-info">Réservations</a>
+                    <form method="post" action="{{ path('admin_event_delete', {id: event.id}) }}" style="display:inline">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+                        <button class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ?')">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="5" class="text-center">Aucun événement.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
