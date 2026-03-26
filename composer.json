@@ -27,8 +27,8 @@
         "symfony/uid": "6.4.*",
         "symfony/validator": "6.4.*",
         "symfony/var-dumper": "6.4.*",
-        "symfony/yaml": "6.4.*",
-        "web-auth/webauthn-lib": "^5.2"
+        "symfony/yaml": "6.4.*"
+        
     },
     "config": {
         "allow-plugins": {
