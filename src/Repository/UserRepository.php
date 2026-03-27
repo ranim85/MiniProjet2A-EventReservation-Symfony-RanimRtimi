@@ -8,14 +8,13 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-use Webauthn\Bundle\Repository\PublicKeyCredentialUserEntityRepository;
 use Webauthn\PublicKeyCredentialUserEntity;
 
 /**
  * Implémente PublicKeyCredentialUserEntityRepository pour WebAuthn
  */
 class UserRepository extends ServiceEntityRepository
-    implements PasswordUpgraderInterface, PublicKeyCredentialUserEntityRepository
+    implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
