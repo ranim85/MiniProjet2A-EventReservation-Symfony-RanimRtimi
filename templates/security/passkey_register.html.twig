@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block title %}Créer un compte — Passkey{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0">Créer un compte</h4>
+                    <small>Authentification sans mot de passe</small>
+                </div>
+                <div class="card-body p-4">
+
+                    <div class="alert alert-info py-2 small">
+                        Une <strong>passkey</strong> utilise la biométrie de votre appareil
+                        (Touch ID, Face ID, Windows Hello) à la place d'un mot de passe.
+                        Votre empreinte ne quitte jamais l'appareil.
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label fw-semibold">Nom d'utilisateur</label>
+                        <input type="text" id="username" class="form-control form-control-lg"
+                               placeholder="ex : alice" autocomplete="username" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="credential-name" class="form-label fw-semibold">Nom de la passkey</label>
+                        <input type="text" id="credential-name" class="form-control"
+                               value="Ma passkey" placeholder="ex : MacBook Touch ID">
+                        <div class="form-text">Aide à identifier l'appareil utilisé.</div>
+                    </div>
+
+                    <button id="btn-register" class="btn btn-primary w-100 btn-lg">
+                        Créer ma passkey
+                    </button>
+
+                    <div id="register-msg" class="mt-3" style="display:none"></div>
+
+                    <hr>
+                    <p class="text-center mb-0 small">
+                        Déjà un compte ?
+                        <a href="{{ path('app_login') }}">Se connecter</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('js/auth.js') }}"></script>
+<script>
+document.getElementById('btn-register').addEventListener('click', async () => {
+    const username       = document.getElementById('username').value.trim();
+    const credentialName = document.getElementById('credential-name').value.trim() || 'Ma passkey';
+    const btn            = document.getElementById('btn-register');
+    const msg            = document.getElementById('register-msg');
+
+    if (!username) {
+        msg.className    = 'alert alert-warning';
+        msg.textContent  = 'Veuillez entrer un nom d\'utilisateur.';
+        msg.style.display = 'block';
+        return;
+    }
+
+    btn.disabled    = true;
+    btn.textContent = 'Création en cours…';
+    msg.style.display = 'none';
+
+    try {
+        const result = await registerPasskey(username, credentialName);
+        msg.className   = 'alert alert-success';
+        msg.innerHTML   = `Passkey créée ! Bienvenue <strong>${result.user.username}</strong>. Redirection…`;
+        msg.style.display = 'block';
+        setTimeout(() => window.location.href = '/', 1500);
+    } catch (err) {
+        msg.className   = 'alert alert-danger';
+        msg.textContent = err.message;
+        msg.style.display = 'block';
+        btn.disabled    = false;
+        btn.textContent = 'Créer ma passkey';
+    }
+});
+</script>
+{% endblock %}

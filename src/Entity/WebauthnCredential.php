@@ -1,35 +1,45 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\WebauthnCredentialRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Uuid;
-use Webauthn\PublicKeyCredentialSource;
 
 #[ORM\Entity(repositoryClass: WebauthnCredentialRepository::class)]
 #[ORM\Table(name: 'webauthn_credential')]
 class WebauthnCredential
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'uuid', unique: true)]
-    private Uuid $id;
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'webauthnCredentials')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    private User $user;
+    private ?User $user = null;
 
     /**
-     * Stocke le JSON sérialisé de PublicKeyCredentialSource
+     * Clé publique ECDSA en format base64 (générée par le navigateur)
      */
     #[ORM\Column(type: 'text')]
-    private string $credentialData;
+    private string $publicKey;
 
     /**
-     * Nom lisible par l'utilisateur (ex: "iPhone Touch ID")
+     * Identifiant unique de la passkey (credential ID en base64)
+     */
+    #[ORM\Column(type: 'text', unique: true)]
+    private string $credentialId;
+
+    /**
+     * Compteur d'utilisations (protection anti-rejeu)
+     */
+    #[ORM\Column]
+    private int $signCount = 0;
+
+    /**
+     * Nom lisible par l'utilisateur (ex: "MacBook Touch ID")
      */
     #[ORM\Column(length: 255)]
-    private string $name;
+    private string $name = 'Ma passkey';
 
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
@@ -39,83 +49,29 @@ class WebauthnCredential
 
     public function __construct()
     {
-        $this->id        = Uuid::v4();
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt  = new \DateTimeImmutable();
         $this->lastUsedAt = new \DateTimeImmutable();
     }
 
-    // ── Getters / Setters ──────────────────────────────────────────────
+    public function getId(): ?int { return $this->id; }
 
-    public function getId(): Uuid
-    {
-        return $this->id;
-    }
+    public function getUser(): ?User { return $this->user; }
+    public function setUser(?User $user): static { $this->user = $user; return $this; }
 
-    public function getUser(): User
-    {
-        return $this->user;
-    }
+    public function getPublicKey(): string { return $this->publicKey; }
+    public function setPublicKey(string $publicKey): static { $this->publicKey = $publicKey; return $this; }
 
-    public function setUser(User $user): static
-    {
-        $this->user = $user;
-        return $this;
-    }
+    public function getCredentialId(): string { return $this->credentialId; }
+    public function setCredentialId(string $credentialId): static { $this->credentialId = $credentialId; return $this; }
 
-    /**
-     * Désérialise le JSON en objet PublicKeyCredentialSource
-     */
-    public function getCredentialSource(): PublicKeyCredentialSource
-    {
-        $data = json_decode($this->credentialData, true);
-        return PublicKeyCredentialSource::createFromArray($data);
-    }
+    public function getSignCount(): int { return $this->signCount; }
+    public function incrementSignCount(): void { $this->signCount++; }
 
-    /**
-     * Sérialise l'objet PublicKeyCredentialSource en JSON
-     */
-    public function setCredentialSource(PublicKeyCredentialSource $source): void
-    {
-        $this->credentialData = json_encode($source);
-    }
+    public function getName(): string { return $this->name; }
+    public function setName(string $name): static { $this->name = $name; return $this; }
 
-    public function getCredentialData(): string
-    {
-        return $this->credentialData;
-    }
+    public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
+    public function getLastUsedAt(): \DateTimeImmutable { return $this->lastUsedAt; }
 
-    public function setCredentialData(string $credentialData): static
-    {
-        $this->credentialData = $credentialData;
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    public function getCreatedAt(): \DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function getLastUsedAt(): \DateTimeImmutable
-    {
-        return $this->lastUsedAt;
-    }
-
-    /**
-     * Met à jour la date de dernière utilisation
-     */
-    public function touch(): void
-    {
-        $this->lastUsedAt = new \DateTimeImmutable();
-    }
+    public function touch(): void { $this->lastUsedAt = new \DateTimeImmutable(); }
 }
