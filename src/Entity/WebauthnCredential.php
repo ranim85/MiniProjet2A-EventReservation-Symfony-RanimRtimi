@@ -26,7 +26,7 @@ class WebauthnCredential
     /**
      * Identifiant unique de la passkey (credential ID en base64)
      */
-    #[ORM\Column(type: 'text', unique: true)]
+    #[ORM\Column(type: 'string', length: 200, unique: true)]
     private string $credentialId;
 
     /**

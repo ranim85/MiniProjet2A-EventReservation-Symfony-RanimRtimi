@@ -1,0 +1,35 @@
+﻿
+Dotenv Variables & Files
+========================
+
+Scanned Files (in descending priority)
+--------------------------------------
+
+ * Ô¿» .env.local.php
+ * Ô¿» .env.test.local
+ * Ô£ô .env.test
+ * Ô£ô .env
+
+Variables
+---------
+
+ ------------------- ----------------------------------------------------------------------- ----------------------------------- ----------------------------------- 
+  Variable            Value                                                                   .env.test                           .env                               
+ ------------------- ----------------------------------------------------------------------- ----------------------------------- ----------------------------------- 
+  APP_DOMAIN          localhost                                                               localhost                           n/a                                
+  APP_ENV             test                                                                    test                                dev                                
+  APP_SECRET          test_secret_key_for_phpunit                                             test_secret_key_for_phpunit...      17fb82d1ddbee2c3d04c0bcefb48f0...  
+  CORS_ALLOW_ORIGIN   ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$                           n/a                                 ^https?://(localhost|127\.0\.0...  
+  DATABASE_URL        mysql://root:@127.0.0.1:3306/event_reservation_test?serverVersion=8.0   mysql://root:@127.0.0.1:3306/e...   mysql://root:@127.0.0.1:3306/e...  
+  JWT_PASSPHRASE      ton_mot_de_passe_secret                                                 ton_mot_de_passe_secret             f9e224b0ed5982136a67cad81cd71d...  
+  JWT_PUBLIC_KEY      %kernel.project_dir%/config/jwt/public.pem                              %kernel.project_dir%/config/jw...   %kernel.project_dir%/config/jw...  
+  JWT_SECRET_KEY      %kernel.project_dir%/config/jwt/private.pem                             %kernel.project_dir%/config/jw...   %kernel.project_dir%/config/jw...  
+  JWT_TOKEN_TTL       3600                                                                    3600                                n/a                                
+  KERNEL_CLASS        App\Kernel                                                              App\Kernel                          n/a                                
+  WEBAUTHN_RP_NAME    Event Reservation App Test                                              Event Reservation App Test          n/a                                
+ ------------------- ----------------------------------------------------------------------- ----------------------------------- ----------------------------------- 
+
+ // Note that values might
+ // be different between  
+ // web and CLI.          
+

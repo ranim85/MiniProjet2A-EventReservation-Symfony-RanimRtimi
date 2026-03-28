@@ -1,0 +1,81 @@
+﻿[notice] Migrating up to DoctrineMigrations\Version20260327011107
+php : [error] Migration Do
+ctrineMigrations\Version20
+260327011107 failed 
+during Execution. Error: 
+"An exception occurred 
+while executing a query: 
+SQLSTATE[42S01]: Base 
+table or view already 
+exists: 1050 La table 
+'user' existe d├®j├á"
+Au caractère Ligne:1 : 1
++ php bin/console doctrine
+:migrations:migrate -n 
+--env=test *>&1 | Out- ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: ([  
+  error] Migrati... exi   
+ ste d├®j├á":String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+[critical] Error thrown 
+while running command "doc
+trine:migrations:migrate 
+-n --env=test". Message: 
+"An exception occurred 
+while executing a query: 
+SQLSTATE[42S01]: Base 
+table or view already 
+exists: 1050 La table 
+'user' existe d├®j├á"
+
+In ExceptionConverter.php 
+line 49:
+                          
+  An exception occurred   
+  while executing a quer  
+  y: SQLSTATE[42S01]: Ba  
+  se table or view alrea  
+  dy exists: 1050 La tab  
+  le 'user' existe d├®j├á 
+  
+                          
+
+In Exception.php line 24:
+                          
+  SQLSTATE[42S01]: Base   
+  table or view already   
+  exists: 1050 La table   
+  'user' existe d├®j├á    
+  
+                          
+
+In Connection.php line 57:
+                          
+  SQLSTATE[42S01]: Base   
+  table or view already   
+  exists: 1050 La table   
+  'user' existe d├®j├á    
+  
+                          
+
+doctrine:migrations:migrat
+e [--write-sql 
+[WRITE-SQL]] [--dry-run] 
+[--query-time] 
+[--allow-no-migration] 
+[--all-or-nothing 
+[ALL-OR-NOTHING]] 
+[--no-all-or-nothing] 
+[--configuration 
+CONFIGURATION] [--em EM] 
+[--conn CONN] [--] 
+[<version>]
+
