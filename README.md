@@ -1,4 +1,4 @@
-# Mini Projet : Application Web de Gestion de Réservations d'Événements (FIA3-GL)
+# Mini Projet : Application Web de Gestion de Réservations d'Événements (FIA2-GL)
 
 ## Description
 Une plateforme événementielle premium permettant aux utilisateurs de découvrir des événements, de s'y inscrire via des formulaires sécurisés et à l'administrateur de gérer l'ensemble de la plateforme via un tableau de bord complet.
@@ -27,6 +27,38 @@ L'application met l'accent sur la sécurité moderne avec l'intégration de **JW
 - Tableau de bord avec statistiques et gestion.
 - CRUD complet sur les événements (Ajouter, Modifier, Supprimer).
 - Consultation des réservations en temps réel par événement.
+
+## Documentation des Routes (Endpoints)
+
+### 🌍 Interface Utilisateur (Public/User)
+| Route | Description |
+| :--- | :--- |
+| `/` | Page d'accueil (Liste des événements) |
+| `/event/{id}` | Consulter les détails d'un événement |
+| `/event/{id}/reserve` | Formulaire de réservation |
+| `/login` | Connexion utilisateur classique |
+| `/register` | Inscription utilisateur classique |
+| `/logout` | Déconnexion |
+
+### 🔐 Interface Administration
+| Route | Description |
+| :--- | :--- |
+| `/admin/login` | Connexion sécurisée Administrateur |
+| `/admin/events/` | Dashboard : Liste des événements |
+| `/admin/events/new` | Créer un nouvel événement |
+| `/admin/events/{id}/edit` | Modifier un événement existant |
+| `/admin/events/{id}/delete` | Supprimer un événement |
+| `/admin/events/{id}/reservations` | Voir la liste des participants par événement |
+
+### 🔑 API & Authentification Moderne (Passkeys/JWT)
+| Route | Méthode | Description |
+| :--- | :--- | :--- |
+| `/api/auth/register` | `POST` | Inscription classique via API (Retourne JWT) |
+| `/api/auth/register/options` | `POST` | Génère le challenge pour créer une Passkey |
+| `/api/auth/register/verify` | `POST` | Vérifie et enregistre la Passkey (Retourne JWT) |
+| `/api/auth/login/options` | `POST` | Génère le challenge pour la connexion WebAuthn |
+| `/api/auth/login/verify` | `POST` | Vérifie la signature et connecte l'utilisateur (Retourne JWT) |
+| `/api/auth/me` | `GET` | Récupère les informations du profil via le token JWT |
 
 ## Installation et Lancement
 
@@ -60,7 +92,11 @@ L'application met l'accent sur la sécurité moderne avec l'intégration de **JW
 3. Lancez le serveur Symfony : `symfony server:start`
 
 ## Auteur
-- **Ranim Rtimi** (FIA3-GL)
+- **Ranim Rtimi** (FIA2-GL)
+
+## Enseignant référent
+
+Sofiene Ben Ahmed — sofiene.benahmed.issatso@gmail.com — ISSAT Sousse
 
 ---
 © 2026 - Institut Supérieur des Sciences Appliquées et de Technologie de Sousse (ISSAT).
