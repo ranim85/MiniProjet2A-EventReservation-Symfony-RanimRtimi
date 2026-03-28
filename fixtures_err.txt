@@ -1,0 +1,37 @@
+   > purging database
+[critical] Error thrown while running command "doctrine:fixtures:load --no-interaction". Message: "An exception occurred while executing a query: SQLSTATE[42S02]: Base table or view not found: 1146 La table 'event_reservation.webauthn_credential' n'existe pas"
+
+In ExceptionConverter.php line 51:
+                          
+  An exception occurred   
+  while executing a quer  
+  y: SQLSTATE[42S02]: Ba  
+  se table or view not f  
+  ound: 1146 La table 'e  
+  vent_reservation.webau  
+  thn_credential' n'exis  
+  te pas                  
+                          
+
+In Exception.php line 24:
+                          
+  SQLSTATE[42S02]: Base   
+  table or view not foun  
+  d: 1146 La table 'even  
+  t_reservation.webauthn  
+  _credential' n'existe   
+  pas                     
+                          
+
+In Connection.php line 27:
+                          
+  SQLSTATE[42S02]: Base   
+  table or view not foun  
+  d: 1146 La table 'even  
+  t_reservation.webauthn  
+  _credential' n'existe   
+  pas                     
+                          
+
+doctrine:fixtures:load [--append] [--dry-run] [--group GROUP] [--em EM] [--purger PURGER] [--purge-exclusions PURGE-EXCLUSIONS] [--purge-with-truncate]
+

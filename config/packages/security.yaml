@@ -72,4 +72,5 @@ security:
         - { path: ^/login,            roles: PUBLIC_ACCESS }
         - { path: ^/register,         roles: PUBLIC_ACCESS }
         - { path: ^/passkey-login,    roles: PUBLIC_ACCESS }
-        - { path: ^/,                 roles: ROLE_USER }
+        - { path: ^/event/\d+/reserve, roles: ROLE_USER } # Seules les réservations exigent une connexion
+        - { path: ^/,                 roles: PUBLIC_ACCESS } # Accueil et pages événements visibles pour tous

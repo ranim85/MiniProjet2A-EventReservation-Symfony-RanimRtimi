@@ -72,10 +72,11 @@ class AdminEventController extends AbstractController
     }
 
     #[Route('/{id}/reservations', name: 'admin_event_reservations', methods: ['GET'])]
-    public function reservations(Event $event): Response
+    public function reservations(Event $event, \App\Repository\ReservationRepository $resRepo): Response
     {
         return $this->render('admin/event/reservations.html.twig', [
             'event' => $event,
+            'reservations' => $resRepo->findBy(['event' => $event]),
         ]);
     }
 }
