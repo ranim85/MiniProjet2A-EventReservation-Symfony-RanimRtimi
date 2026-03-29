@@ -1,0 +1,28 @@
+﻿PHPUnit 13.0.5 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.1
+Configuration: C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\phpunit.dist.xml
+
+...F.....                                                           9 / 9 (100%)
+
+Time: 00:00.744, Memory: 30.00 MB
+
+There was 1 failure:
+
+1) App\Tests\Controller\AuthApiControllerTest::testMeEndpointWithValidToken
+Failed asserting that the Response is successful.
+HTTP/1.1 401 Unauthorized
+Cache-Control: no-cache, private
+Content-Type:  application/json
+Date:          Fri, 27 Mar 2026 22:43:39 GMT
+X-Robots-Tag:  noindex
+
+{"error":"Non authentifi\u00e9."}
+
+C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\framework-bundle\Test\BrowserKitAssertionsTrait.php:150
+C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\framework-bundle\Test\BrowserKitAssertionsTrait.php:35
+C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\tests\Controller\AuthApiControllerTest.php:93
+C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\phpunit\phpunit\phpunit:104
+
+FAILURES!
+Tests: 9, Assertions: 20, Failures: 1.

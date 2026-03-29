@@ -1,39 +1,76 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+        admin_provider:
+            entity:
+                class: App\Entity\Admin
+                property: username
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        # Endpoints publics API auth (pas de JWT requis)
+        auth_api:
+            pattern: ^/api/auth/(register|login)
+            stateless: true
+            security: false
+
+        # API protégée par JWT
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: app_user_provider
+            entry_point: jwt
+            jwt: ~
+            refresh_jwt:
+                check_path: /api/token/refresh
+
+        # Interface admin (form_login classique)
+        admin:
+            pattern: ^/admin
+            provider: admin_provider
+            form_login:
+                login_path: admin_login
+                check_path: admin_login
+                default_target_path: admin_event_index
+                enable_csrf: true
+            logout:
+                path: admin_logout
+                target: admin_login
+
+        # Interface utilisateur (form_login classique)
         main:
-            lazy: true
-            provider: users_in_memory
+            pattern: ^/
+            provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: app_home
+                enable_csrf: true
+            logout:
+                path: app_logout
+                target: app_login
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-
-when@test:
-    security:
-        password_hashers:
-            # By default, password hashers are resource intensive and take time. This is
-            # important to generate secure password hashes. In tests however, secure hashes
-            # are not important, waste resources and increase test times. The following
-            # reduces the work factor to the lowest possible values.
-            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
-                algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+        # Routes publiques API
+        - { path: ^/api/auth,         roles: PUBLIC_ACCESS }
+        - { path: ^/api/token/refresh, roles: PUBLIC_ACCESS }
+        # Routes protégées API (JWT requis)
+        - { path: ^/api,              roles: ROLE_USER }
+        # Routes admin
+        - { path: ^/admin/login,      roles: PUBLIC_ACCESS }
+        - { path: ^/admin,            roles: ROLE_ADMIN }
+        # Routes utilisateur
+        - { path: ^/login,            roles: PUBLIC_ACCESS }
+        - { path: ^/register,         roles: PUBLIC_ACCESS }
+        - { path: ^/passkey-login,    roles: PUBLIC_ACCESS }
+        - { path: ^/event/\d+/reserve, roles: ROLE_USER } # Seules les réservations exigent une connexion
+        - { path: ^/,                 roles: PUBLIC_ACCESS } # Accueil et pages événements visibles pour tous

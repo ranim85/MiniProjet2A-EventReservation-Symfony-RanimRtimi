@@ -1,0 +1,160 @@
+﻿
+Fatal error: Uncaught Symfony\Component\DependencyInjection\Exception\EnvNotFoundException: Environment variable not found: "DATABASE_URL". in C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\dependency-injection\EnvVarProcessor.php:217
+Stack trace:
+#0 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\dependency-injection\Container.php(383): Symfony\Component\DependencyInjection\EnvVarProcessor->getEnv('string', 'DATABASE_URL', Object(Closure))
+#1 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\dependency-injection\EnvVarProcessor.php(165): Symfony\Component\DependencyInjection\Container->getEnv('DATABASE_URL')
+#2 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\dependency-injection\Container.php(383): Symfony\Component\DependencyInjection\EnvVarProcessor->getEnv('resolve', 'DATABASE_URL', Object(Closure))
+#3 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\var\cache\test\ContainerX0gomxA\getDoctrine_Dbal_DefaultConnectionService.php(24): Symfony\Component\DependencyInjection\Container->getEnv('resolve:DATABAS...')
+#4 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\var\cache\test\ContainerX0gomxA\App_KernelTestDebugContainer.php(208): ContainerX0gomxA\getDoctrine_Dbal_DefaultConnectionService::do(Object(ContainerX0gomxA\App_KernelTestDebugContainer), true)
+#5 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\dependency-injection\Container.php(229): ContainerX0gomxA\App_KernelTestDebugContainer->load('getDoctrine_Dba...')
+#6 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\dependency-injection\Container.php(211): Symfony\Component\DependencyInjection\Container::make(Object(ContainerX0gomxA\App_KernelTestDebugContainer), 'doctrine.dbal.d...', 1)
+#7 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\doctrine-bridge\ManagerRegistry.php(34): Symfony\Component\DependencyInjection\Container->get('doctrine.dbal.d...')
+#8 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\doctrine\persistence\src\Persistence\AbstractManagerRegistry.php(71): Symfony\Bridge\Doctrine\ManagerRegistry->getService('doctrine.dbal.d...')
+#9 C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\dump_db.php(5): Doctrine\Persistence\AbstractManagerRegistry->getConnection()
+#10 {main}
+  thrown in C:\Users\HP\Desktop\ING 02\sem2\web\Projets_Symfony\MiniProjet2A-EventReservation-RanimRtimi\vendor\symfony\dependency-injection\EnvVarProcessor.php on line 217
+php : PHP Fatal error:  
+Uncaught Symfony\Component
+\DependencyInjection\Excep
+tion\EnvNotFoundException:
+ Environment variable not 
+found: "DATABASE_URL". in 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\vendor\symf
+ony\dependency-injection\E
+nvVarProcessor.php:217
+Au caractère Ligne:1 : 1
++ php dump_db.php *>&1 | 
+Out-File -Encoding utf8 
+dump.txt
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (P  
+  HP Fatal error...oces   
+ sor.php:217:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+Stack trace:
+#0 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\vendor\symf
+ony\dependency-injection\C
+ontainer.php(383): Symfony
+\Component\DependencyInjec
+tion\EnvVarProcessor->getE
+nv('string', 
+'DATABASE_URL', 
+Object(Closure))
+#1 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\vendor\symf
+ony\dependency-injection\E
+nvVarProcessor.php(165): S
+ymfony\Component\Dependenc
+yInjection\Container->getE
+nv('DATABASE_URL')
+#2 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\vendor\symf
+ony\dependency-injection\C
+ontainer.php(383): Symfony
+\Component\DependencyInjec
+tion\EnvVarProcessor->getE
+nv('resolve', 
+'DATABASE_URL', 
+Object(Closure))
+#3 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\var\cache\t
+est\ContainerX0gomxA\getDo
+ctrine_Dbal_DefaultConnect
+ionService.php(24): Symfon
+y\Component\DependencyInje
+ction\Container->getEnv('r
+esolve:DATABAS...')
+#4 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\var\cache\t
+est\ContainerX0gomxA\App_K
+ernelTestDebugContainer.ph
+p(208): ContainerX0gomxA\g
+etDoctrine_Dbal_DefaultCon
+nectionService::do(Object(
+ContainerX0gomxA\App_Kerne
+lTestDebugContainer), 
+true)
+#5 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\vendor\symf
+ony\dependency-injection\C
+ontainer.php(229): Contain
+erX0gomxA\App_KernelTestDe
+bugContainer->load('getDoc
+trine_Dba...')
+#6 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\vendor\symf
+ony\dependency-injection\C
+ontainer.php(211): Symfony
+\Component\DependencyInjec
+tion\Container::make(Objec
+t(ContainerX0gomxA\App_Ker
+nelTestDebugContainer), 
+'doctrine.dbal.d...', 1)
+#7 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\vendor\symf
+ony\doctrine-bridge\Manage
+rRegistry.php(34): Symfony
+\Component\DependencyInjec
+tion\Container->get('doctr
+ine.dbal.d...')
+#8 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\vendor\doct
+rine\persistence\src\Persi
+stence\AbstractManagerRegi
+stry.php(71): Symfony\Brid
+ge\Doctrine\ManagerRegistr
+y->getService('doctrine.db
+al.d...')
+#9 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\dump_db.php
+(5): Doctrine\Persistence\
+AbstractManagerRegistry->g
+etConnection()
+#10 {main}
+  thrown in 
+C:\Users\HP\Desktop\ING 02
+\sem2\web\Projets_Symfony\
+MiniProjet2A-EventReservat
+ion-RanimRtimi\vendor\symf
+ony\dependency-injection\E
+nvVarProcessor.php on 
+line 217

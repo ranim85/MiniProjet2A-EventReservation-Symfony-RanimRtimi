@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation - {{ event.title }}{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="glass-card mb-4 p-5 text-center">
+            <h2 class="h4 mb-3">Réserver votre place pour</h2>
+            <h1 class="text-gradient-primary fw-bold mb-4">{{ event.title }}</h1>
+            <div class="d-flex justify-content-center gap-3 text-secondary mb-4">
+                <span><i class="bi bi-calendar"></i> {{ event.date|date('d/m/Y') }}</span>
+                <span><i class="bi bi-geo-alt"></i> {{ event.location }}</span>
+            </div>
+            
+            <div class="form-container text-start">
+                {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+                    
+                    {% for child in form %}
+                        {% if child.vars.name != '_token' %}
+                             {{ form_row(child, {'attr': {'class': 'form-control form-glass mb-4', 'placeholder': child.vars.label}}) }}
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="d-grid mt-5">
+                        <button type="submit" class="btn btn-glass btn-lg">Confirmer la Réservation</button>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+            
+            <a href="{{ path('app_event_show', {'id': event.id}) }}" class="btn btn-link text-secondary mt-4 text-decoration-none">Annuler et retourner à l'événement</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

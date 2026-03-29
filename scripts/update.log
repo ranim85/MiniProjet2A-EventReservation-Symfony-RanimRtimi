@@ -1,0 +1,78 @@
+﻿php :  Updating 
+database schema...
+Au caractère Ligne:1 : 1
++ php bin/console 
+doctrine:schema:update 
+--force --env=test *>&1 
+| Out- ...
++ ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
+    + CategoryInfo      
+        : NotSpecified: 
+(     Updating database 
+sch    ema...:String) 
+[], Re    moteException
+    + 
+FullyQualifiedError    
+Id : NativeCommandErr   
+ or
+ 
+
+[critical] Error thrown 
+while running command 
+"doctrine:schema:update 
+--force --env=test". 
+Message: "An exception 
+occurred while 
+executing a query: 
+SQLSTATE[42000]: Syntax 
+error or access 
+violation: 1071 La cl├® 
+est trop longue. 
+Longueur maximale: 1000"
+
+In 
+ExceptionConverter.php 
+line 102:
+                        
+  An exception occurre  
+  d while executing a   
+  query: SQLSTATE[4200  
+  0]: Syntax error or   
+  access violation: 10  
+  71 La cl├® est trop l 
+ 
+  ongue. Longueur maxi  
+  male: 1000            
+                        
+
+In Exception.php line 
+24:
+                        
+  SQLSTATE[42000]: Syn  
+  tax error or access   
+  violation: 1071 La c  
+  l├® est trop longue.  
+ 
+  Longueur maximale: 1  
+  000                   
+                        
+
+In Connection.php line 
+27:
+                        
+  SQLSTATE[42000]: Syn  
+  tax error or access   
+  violation: 1071 La c  
+  l├® est trop longue.  
+ 
+  Longueur maximale: 1  
+  000                   
+                        
+
+doctrine:schema:update 
+[--em EM] [--complete] 
+[--dump-sql] 
+[-f|--force]
+

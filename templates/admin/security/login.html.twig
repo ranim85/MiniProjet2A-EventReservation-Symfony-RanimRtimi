@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion Administrateur{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 col-lg-5">
+            <div class="glass-card p-5 animate-fade-in shadow-lg" style="border-top: 4px solid var(--secondary-color);">
+                <div class="text-center mb-5">
+                    <h1 class="h3 mb-2 fw-bold text-white">Administration</h1>
+                    <p class="text-secondary small">Veuillez entrer vos identifiants administrateur pour continuer</p>
+                </div>
+
+                {% if error %}
+                    <div class="alert alert-danger" style="background: rgba(220, 53, 69, 0.1); border: 1px solid rgba(220, 53, 69, 0.3); color: #ff6b81;">
+                        <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                <form method="post">
+                    <div class="mb-4">
+                        <label for="username" class="form-label text-secondary small text-uppercase fw-bold">Email Administrateur</label>
+                        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control form-glass py-2" autocomplete="username" required autofocus placeholder="admin@domain.com">
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="password" class="form-label text-secondary small text-uppercase fw-bold">Mot de passe</label>
+                        <input type="password" name="_password" id="password" class="form-control form-glass py-2" autocomplete="current-password" required placeholder="••••••••">
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="d-grid mt-4">
+                        <button class="btn btn-glass btn-lg text-uppercase fw-bold shadow" type="submit">
+                            Accéder au panel Admin
+                        </button>
+                    </div>
+                    
+                    <div class="text-center mt-4 border-top pt-4" style="border-color: var(--card-border) !important;">
+                        <a href="{{ path('app_login') }}" class="text-secondary small text-decoration-none">← Retour à la connexion utilisateur</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

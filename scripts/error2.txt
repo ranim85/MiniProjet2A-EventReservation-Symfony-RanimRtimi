@@ -1,0 +1,25 @@
+
+In RegisterEntryPointPass.php line 79:
+                          
+  Because you have multi  
+  ple authenticators in   
+  firewall "api", you ne  
+  ed to set the "entry_p  
+  oint" key to one of yo  
+  ur authenticators ("jw  
+  t", "refresh_jwt") or   
+  a service ID implement  
+  ing "Symfony\Component  
+  \Security\Http\EntryPo  
+  int\AuthenticationEntr  
+  yPointInterface". The   
+  "entry_point" determin  
+  es what should happen   
+  (e.g. redirect to "/lo  
+  gin") when an anonymou  
+  s user tries to access  
+   a protected page.      
+                          
+
+2026-03-28T00:35:32+00:00 [info] User Deprecated: Method "Symfony\Component\HttpKernel\Bundle\Bundle::build()" might add "void" as a native return type declaration in the future. Do the same in child class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" now to avoid errors or add an explicit @return annotation to suppress this message.
+2026-03-28T00:35:32+00:00 [info] User Deprecated: Method "Symfony\Component\HttpKernel\Bundle\Bundle::registerCommands()" might add "void" as a native return type declaration in the future. Do the same in child class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" now to avoid errors or add an explicit @return annotation to suppress this message.

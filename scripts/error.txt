@@ -1,0 +1,11 @@
+
+In FormLoginFactory.php line 67:
+                          
+  The "csrf_token_genera  
+  tor" on "form_login" d  
+  oes not exist, use "en  
+  able_csrf" instead.     
+                          
+
+2026-03-28T00:34:06+00:00 [info] User Deprecated: Method "Symfony\Component\HttpKernel\Bundle\Bundle::build()" might add "void" as a native return type declaration in the future. Do the same in child class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" now to avoid errors or add an explicit @return annotation to suppress this message.
+2026-03-28T00:34:06+00:00 [info] User Deprecated: Method "Symfony\Component\HttpKernel\Bundle\Bundle::registerCommands()" might add "void" as a native return type declaration in the future. Do the same in child class "Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle" now to avoid errors or add an explicit @return annotation to suppress this message.

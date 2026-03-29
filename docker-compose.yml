@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: event_php
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: "1"
+      APP_SECRET: ${APP_SECRET:-change_me_in_production}
+      DATABASE_URL: mysql://user:password@db:3306/event_reservation?serverVersion=8.0
+      JWT_SECRET_KEY: /var/www/config/jwt/private.pem
+      JWT_PUBLIC_KEY: /var/www/config/jwt/public.pem
+      JWT_PASSPHRASE: ${JWT_PASSPHRASE:-change_me}
+      JWT_TOKEN_TTL: "3600"
+      APP_DOMAIN: localhost
+      WEBAUTHN_RP_NAME: "Event Reservation App"
+      MAILER_DSN: smtp://mailhog:1025
+    volumes:
+      - .:/var/www
+      - ./config/jwt:/var/www/config/jwt:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: event_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/public:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - php
+    networks:
+      - app_network
+
+  db:
+    image: mysql:8.0
+    container_name: event_db
+    environment:
+      MYSQL_DATABASE: event_reservation
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 5s
+      retries: 10
+    networks:
+      - app_network
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: event_mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  mysql_data:

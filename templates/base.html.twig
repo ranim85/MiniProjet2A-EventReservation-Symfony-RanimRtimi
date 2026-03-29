@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr" data-bs-theme="dark">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-        {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}EventReservation{% endblock %}</title>
+        
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
+        <!-- Bootstrap 5 CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        
+        {% block stylesheets %}{% endblock %}
 
         {% set frankenphpHotReload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
         {% if frankenphpHotReload %}
@@ -18,6 +25,65 @@
         {% endif %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-glass sticky-top mb-4">
+            <div class="container">
+                <a class="navbar-brand text-gradient-primary fs-3 fw-bold" href="{{ path('app_home') }}">EventHub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ path('app_home') }}">Événements</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        {% if app.user %}
+                            <li class="nav-item me-3 d-flex align-items-center">
+                                <span class="text-secondary">Bienvenue, {{ app.user.userIdentifier }}</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-glass btn-sm mt-1" href="{{ path('app_logout') }}">Déconnexion</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="btn btn-glass btn-sm mt-1" href="{{ path('app_login') }}">Connexion</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="container animate-fade-in">
+            <!-- Flash Messages -->
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label == 'error' ? 'danger' : label }} alert-dismissible fade show glass-card border-0 mb-4" role="alert" style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);">
+                                {{ message }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% block body %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-auto py-5 text-center text-secondary border-top mt-5" style="border-color: var(--card-border) !important;">
+            <div class="container">
+                <p class="mb-0">© 2026 EventHub par Ranim Rtimi. Tous droits réservés.</p>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

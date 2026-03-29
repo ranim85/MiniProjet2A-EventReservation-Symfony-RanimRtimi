@@ -1,0 +1,29 @@
+ -------------------- --------------------------------- 
+  Symfony                                               
+ -------------------- --------------------------------- 
+  Version              6.4.35                           
+  Long-Term Support    Yes                              
+  End of maintenance   11/2026 (in +247 days)           
+  End of life          11/2027 (in +612 days)           
+ -------------------- --------------------------------- 
+  Kernel                                                
+ -------------------- --------------------------------- 
+  Type                 App\Kernel                       
+  Environment          dev                              
+  Debug                true                             
+  Charset              UTF-8                            
+  Cache directory      ./var/cache/dev (4.1 MiB)        
+  Build directory      ./var/cache/dev (4.1 MiB)        
+  Log directory        ./var/log (0 B)                  
+ -------------------- --------------------------------- 
+  PHP                                                   
+ -------------------- --------------------------------- 
+  Version              8.5.1                            
+  Architecture         64 bits                          
+  Intl locale          n/a                              
+  Timezone             UTC (2026-03-28T00:36:29+00:00)  
+  OPcache              true                             
+  APCu                 false                            
+  Xdebug               false                            
+ -------------------- --------------------------------- 
+
