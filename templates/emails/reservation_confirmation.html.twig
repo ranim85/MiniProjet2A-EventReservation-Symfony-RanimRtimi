@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de votre Réservation{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="card glass-morphism p-4 border-0 shadow-lg text-white" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px;">
+        <h1 class="display-4 mb-4" style="color: #00d2ff; text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);">🎉 Réservation Confirmée !</h1>
+        
+        <p class="lead mb-4">Bonjour <strong>{{ reservation.name }}</strong>,</p>
+        
+        <div class="p-3 mb-4" style="background: rgba(255, 255, 255, 0.05); border-left: 4px solid #00d2ff; border-radius: 10px;">
+            <h2 class="h4 mb-3">Détails de l'événement :</h2>
+            <ul class="list-unstyled">
+                <li class="mb-2">📅 <strong>Date :</strong> {{ event.date|date('d/m/Y H:i') }}</li>
+                <li class="mb-2">📍 <strong>Lieu :</strong> {{ event.location }}</li>
+                <li class="mb-2">🎟️ <strong>Événement :</strong> {{ event.title }}</li>
+            </ul>
+        </div>
+
+        <p>Nous sommes ravis de vous compter parmi nous. Votre place est désormais réservée.</p>
+        
+        <hr class="my-4" style="border-top: 1px solid rgba(255, 255, 255, 0.2);">
+        
+        <p class="small text-muted mb-0">Cet email a été envoyé automatiquement par le système de réservation.</p>
+        <p class="small text-muted">&copy; 2026 Event Reservation App - Ranim Rtimi</p>
+    </div>
+</div>
+
+<style>
+    body {
+        background: radial-gradient(circle at top right, #1a1a2e, #16213e);
+        font-family: 'Inter', sans-serif;
+    }
+    .glass-morphism {
+        border: 1px solid rgba(255, 255, 255, 0.125);
+    }
+</style>
+{% endblock %}

@@ -17,6 +17,7 @@ services:
       JWT_TOKEN_TTL: "3600"
       APP_DOMAIN: localhost
       WEBAUTHN_RP_NAME: "Event Reservation App"
+      MAILER_DSN: smtp://mailhog:1025
     volumes:
       - .:/var/www
       - ./config/jwt:/var/www/config/jwt:ro
@@ -55,6 +56,15 @@ services:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       timeout: 5s
       retries: 10
+    networks:
+      - app_network
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: event_mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
     networks:
       - app_network
 

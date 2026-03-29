@@ -26,6 +26,7 @@ L'application repose sur une architecture moderne utilisant des outils performan
 - **Serveur Web :** Serveur local Symfony / Serveur Web intégré à Docker.
 - **Conteneurisation :** Docker 
 - **Sécurité :** JWT (Lexik), WebAuthn (Passkeys).
+- **Mailing :** Symfony Mailer + Mailhog (Tests locaux).
 
 > [!NOTE] 
 > **Architecture Logicielle** : Nous avons opté pour une séparation claire entre la logique métier (Controllers), les accès aux données (Repositories) et les vues (Twig).
@@ -153,6 +154,7 @@ Le frontend a été conçu avec une esthétique **Premium (Glassmorphism)**. Un 
 - Consulter la liste des événements.
 - Voir les détails (description longue, date précise).
 - Remplir un formulaire de réservation avec validation en temps réel.
+- **Réception d'un email de confirmation** automatique après réservation.
 
 ![Homepage Dark Mode](assets/Homepage%20Dark%20Mode.png)
 
