@@ -5,6 +5,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\PasskeyAuthService;
 use Doctrine\ORM\EntityManagerInterface;
+use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +21,7 @@ class AuthApiController extends AbstractController
     public function __construct(
         private JWTTokenManagerInterface     $jwtManager,
         private RefreshTokenManagerInterface $refreshManager,
+        private RefreshTokenGeneratorInterface $refreshTokenGenerator,
         private EntityManagerInterface       $em,
         private UserRepository               $userRepo,
     ) {}
@@ -108,7 +110,7 @@ class AuthApiController extends AbstractController
                 'success'       => true,
                 'message'       => 'Passkey enregistrée ! Bienvenue ' . $user->getUsername(),
                 'token'         => $this->jwtManager->create($user),
-                'refresh_token' => $this->refreshManager->createForUser($user)->getRefreshToken(),
+                'refresh_token' => $this->refreshTokenGenerator->createForUserWithTtl($user, 2592000)->getRefreshToken(),
                 'user'          => ['id' => $user->getId(), 'username' => $user->getUsername()],
             ]);
         } catch (\Exception $e) {
@@ -162,7 +164,7 @@ class AuthApiController extends AbstractController
                 'success'       => true,
                 'message'       => 'Connexion réussie ! Bonjour ' . $user->getUsername(),
                 'token'         => $this->jwtManager->create($user),
-                'refresh_token' => $this->refreshManager->createForUser($user)->getRefreshToken(),
+                'refresh_token' => $this->refreshTokenGenerator->createForUserWithTtl($user, 2592000)->getRefreshToken(),
                 'user'          => ['id' => $user->getId(), 'username' => $user->getUsername()],
             ]);
         } catch (\Exception $e) {

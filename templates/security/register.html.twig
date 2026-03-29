@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription — EventHub{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 col-lg-5">
+            <div class="glass-card p-5 animate-fade-in shadow-lg">
+                <div class="text-center mb-5">
+                    <h1 class="h3 mb-3 fw-bold text-gradient-primary">Créer un compte</h1>
+                    <p class="text-secondary small">Rejoignez EventHub pour gérer vos réservations</p>
+                </div>
+
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label == 'error' ? 'danger' : label }} mb-4" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff;">
+                            <i class="bi {{ label == 'error' ? 'bi-exclamation-circle' : 'bi-check-circle' }} me-2"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                <form method="post">
+                    <div class="mb-4">
+                        <label for="username" class="form-label text-secondary small text-uppercase fw-bold">Nom d'utilisateur</label>
+                        <input type="text" name="username" id="username" class="form-control form-glass py-2" required autofocus placeholder="votre_pseudo">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label text-secondary small text-uppercase fw-bold">Mot de passe</label>
+                        <input type="password" name="password" id="password" class="form-control form-glass py-2" required placeholder="••••••••">
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="confirm_password" class="form-label text-secondary small text-uppercase fw-bold">Confirmer le mot de passe</label>
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control form-glass py-2" required placeholder="••••••••">
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button class="btn btn-glass btn-lg text-uppercase fw-bold shadow" type="submit">
+                            S'inscrire
+                        </button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p class="text-secondary small">Vous avez déjà un compte ? <a href="{{ path('app_login') }}" class="text-primary fw-bold text-decoration-none" style="color: #4facfe !important;">Se connecter</a></p>
+                </div>
+                
+                <hr class="my-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                
+                <div class="text-center">
+                    <p class="text-secondary small mb-3">Ou essayez l'authentification moderne :</p>
+                    <a href="{{ path('passkey_register_page') }}" class="btn btn-outline-light btn-sm px-4">
+                        <i class="bi bi-shield-lock-fill me-2"></i>Utiliser une Passkey
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

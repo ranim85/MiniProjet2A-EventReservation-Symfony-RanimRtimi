@@ -295,7 +295,7 @@ class PasskeyAuthService
             }
         }
 
-        // En développement, on accepte localhost avec n'importe quel port
+        // En développement, on accepte localhost et 127.0.0.1 avec n'importe quel port
         if (str_contains($this->appDomain, 'localhost') || $this->appDomain === '127.0.0.1') {
             if (str_starts_with($origin, 'http://localhost') || str_starts_with($origin, 'http://127.0.0.1')) {
                 return;

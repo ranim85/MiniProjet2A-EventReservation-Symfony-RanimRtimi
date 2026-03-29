@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body p-4">
 
-                    {{-- Connexion classique --}}
+                    {# Connexion classique #}
                     <h6 class="text-muted mb-3">Avec mot de passe</h6>
                     {% if app.request.query.get('error') %}
                         <div class="alert alert-danger py-2 small">Identifiants incorrects.</div>
@@ -33,7 +33,7 @@
                         <hr class="flex-grow-1"><span class="px-2 text-muted small">ou</span><hr class="flex-grow-1">
                     </div>
 
-                    {{-- Connexion Passkey --}}
+                    {# Connexion Passkey #}
                     <h6 class="text-muted mb-2">Avec passkey (biométrie)</h6>
                     <input type="text" id="passkey-username" class="form-control mb-2"
                            placeholder="Nom d'utilisateur (optionnel)" autocomplete="username">

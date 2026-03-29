@@ -11,17 +11,26 @@
                     <p class="text-secondary small">Veuillez entrer vos identifiants pour continuer</p>
                 </div>
 
-                {% if error %}
-                    <div class="alert alert-danger" style="background: rgba(220, 53, 69, 0.1); border: 1px solid rgba(220, 53, 69, 0.3); color: #ff6b81;">
+                 {% if error %}
+                    <div class="alert alert-danger mb-4" style="background: rgba(220, 53, 69, 0.1); border: 1px solid rgba(220, 53, 69, 0.3); color: #ff6b81;">
                         <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                         {{ error.messageKey|trans(error.messageData, 'security') }}
                     </div>
                 {% endif %}
 
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label == 'error' ? 'danger' : label }} mb-4" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff;">
+                            <i class="bi {{ label == 'error' ? 'bi-exclamation-circle' : 'bi-check-circle' }} me-2"></i>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
                 <form method="post">
                     <div class="mb-4">
-                        <label for="username" class="form-label text-secondary small text-uppercase fw-bold">Email d'utilisateur</label>
-                        <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control form-glass py-2" autocomplete="username" required autofocus placeholder="votre@email.com">
+                        <label for="username" class="form-label text-secondary small text-uppercase fw-bold">Email d'utilisateur / Pseudo</label>
+                        <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control form-glass py-2" autocomplete="username" required autofocus placeholder="votre_pseudo">
                     </div>
 
                     <div class="mb-5">
@@ -37,6 +46,19 @@
                         </button>
                     </div>
                 </form>
+
+                <div class="text-center mt-4">
+                    <p class="text-secondary small">Pas encore de compte ? <a href="{{ path('app_register') }}" class="text-primary fw-bold text-decoration-none" style="color: #4facfe !important;">S'inscrire gratuitement</a></p>
+                </div>
+
+                <hr class="my-4" style="border-top: 1px solid rgba(255,255,255,0.1);">
+
+                <div class="text-center">
+                    <p class="text-secondary small mb-3">Expérience sans mot de passe :</p>
+                    <a href="{{ path('passkey_login_page') }}" class="btn btn-outline-light btn-sm px-4">
+                        <i class="bi bi-key-fill me-2"></i>Se connecter via Passkey
+                    </a>
+                </div>
             </div>
         </div>
     </div>

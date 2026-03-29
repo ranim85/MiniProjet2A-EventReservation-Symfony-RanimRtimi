@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route('/api/auth/register', name: 'api_register', methods: ['POST'])]
-    public function register(
+    public function apiRegister(
         Request $request,
         EntityManagerInterface $em,
         UserPasswordHasherInterface $hasher,
@@ -37,6 +37,48 @@ class SecurityController extends AbstractController
             'message' => 'Utilisateur créé',
             'token' => $jwtManager->create($user),
         ], 201);
+    }
+
+    #[Route('/register', name: 'app_register', methods: ['GET', 'POST'])]
+    public function register(
+        Request $request,
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $hasher
+    ): Response {
+        if ($request->isMethod('POST')) {
+            $username = $request->request->get('username');
+            $password = $request->request->get('password');
+            $confirm  = $request->request->get('confirm_password');
+
+            if (!$username || !$password) {
+                $this->addFlash('error', 'Veuillez remplir tous les champs');
+                return $this->render('security/register.html.twig');
+            }
+
+            if ($password !== $confirm) {
+                $this->addFlash('error', 'Les mots de passe ne correspondent pas');
+                return $this->render('security/register.html.twig');
+            }
+
+            $existing = $em->getRepository(User::class)->findOneBy(['username' => $username]);
+            if ($existing) {
+                $this->addFlash('error', 'Ce nom d\'utilisateur est déjà pris');
+                return $this->render('security/register.html.twig');
+            }
+
+            $user = new User();
+            $user->setUsername($username);
+            $user->setPasswordHash($hasher->hashPassword($user, $password));
+            $user->setRoles(['ROLE_USER']);
+
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', 'Félicitations ! Votre compte a été créé. Connectez-vous maintenant.');
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('security/register.html.twig');
     }
 
     #[Route('/login', name: 'app_login', methods: ['GET', 'POST'])]
