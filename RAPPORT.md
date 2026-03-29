@@ -142,7 +142,7 @@ public function loginVerify(Request $request, PasskeyAuthService $passkeyService
 }
 ```
 
-**[ZONE DE CAPTURE : Interface de connexion Passkey]**
+![Interface de connexion Passkey](assets/Interface%20de%20connexion%20Passkey.png)
 
 ---
 
@@ -154,7 +154,7 @@ Le frontend a été conçu avec une esthétique **Premium (Glassmorphism)**. Un 
 - Voir les détails (description longue, date précise).
 - Remplir un formulaire de réservation avec validation en temps réel.
 
-**[ZONE DE CAPTURE : Homepage Dark Mode avec Glassmorphism]**
+![Homepage Dark Mode](assets/Homepage%20Dark%20Mode.png)
 
 ### 5.2 Côté Administrateur
 L'administrateur dispose d'un espace sécurisé (`/admin/events`) pour effectuer toutes les opérations de gestion (CRUD).
@@ -163,7 +163,7 @@ L'administrateur dispose d'un espace sécurisé (`/admin/events`) pour effectuer
 - **CRUD** : Formulaires de création et édition.
 - **Suivi** : Consultation de la liste des réservations par événement.
 
-**[ZONE DE CAPTURE : Dashboard Administration]**
+![Dashboard Administration](assets/Dashboard%20Administration.png)
 
 ---
 
@@ -172,9 +172,10 @@ L'administrateur dispose d'un espace sécurisé (`/admin/events`) pour effectuer
 Le développement a suivi une approche agile basée sur les branches Git et les **Milestones** GitHub.
 
 - **Branches** : Utilisation de `main` pour le stable, `dev` pour l'intégration et de branches `feature/` dédiées.
-- **Milestones** : Validation par étapes (Milestone 1 : BDD, Milestone 2 : Back, Milestone 3 : Front).
+- **Milestones** : Validation par étapes (Milestone 1 : BDD, Milestone 2 : Back, Milestone 3 : Front
+Milestone 4 :v1.0 Initail Setup).
 
-**[ZONE DE CAPTURE : Historique des commits ou page des Milestones GitHub]**
+![GitHub Milestones](assets/milestone.png)
 
 ---
 
